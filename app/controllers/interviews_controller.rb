@@ -1,7 +1,7 @@
 class InterviewsController < ApplicationController
 
   def index
-    @interviews = Interview.where(user_id: current_user.id).order(interview_datetime: :asc)
+    @interviews = Interview.where(user_id: params[:user_id]).order(interview_datetime: :asc)
   end
 
   def new
@@ -38,7 +38,7 @@ class InterviewsController < ApplicationController
 
   private
   def create_params
-    params.require(:interview).permit(:interview_datetime).merge(user_id: current_user.id)
+    params.require(:interview).permit(:interview_datetime).merge(user_id: params[:user_id])
   end
 
   def update_params

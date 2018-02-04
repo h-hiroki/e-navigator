@@ -1,0 +1,16 @@
+%h1 #{@interviews[0].user.name}さんの面接一覧
+%h3 現在の面接日程
+
+%table
+  %thead
+    %td 面接開始時間
+  %tbody
+  - @interviews.each do |interview|
+    %tr
+      %td
+        = interview.interview_datetime.strftime("%Y/%m/%d  %H:%M:%S")
+
+%br
+= link_to "新規日程作成", new_user_interview_path
+= link_to "トップページ", users_path
+
