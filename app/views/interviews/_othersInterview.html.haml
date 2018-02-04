@@ -1,16 +1,20 @@
-%h1 #{@interviews[0].user.name}さんの面接一覧
+%h1 #{@user.name}さんの面接一覧
 %h3 現在の面接日程
-
+%p 面接日程を確定する場合は以下から選んでください。
 %table
   %thead
     %td 面接開始時間
+    %td 日程確定状態
   %tbody
   - @interviews.each do |interview|
+    - interview_date = interview.interview_datetime.strftime("%Y/%m/%d  %H:%M:%S")
     %tr
       %td
-        = interview.interview_datetime.strftime("%Y/%m/%d  %H:%M:%S")
+        = link_to interview_date, user_interviews_change_state_path(id: interview.id), method: "POST", data: {confirm: "#{interview_date}で面接を確定します。よろしいですか？"}
+      %td
+        - if interview.state == 1
+          %p 面接が設定されています
 
 %br
-= link_to "新規日程作成", new_user_interview_path
 = link_to "トップページ", users_path
 

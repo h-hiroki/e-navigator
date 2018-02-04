@@ -3,12 +3,18 @@
 %table
   %thead
     %td 面接開始時間
+    %td 承認状態
     %td{ colspan: "2" } 日程編集
   %tbody
   - @interviews.each do |interview|
     %tr
       %td
         = interview.interview_datetime.strftime("%Y/%m/%d  %H:%M:%S")
+      %td
+        - if interview.state == 1
+          %p 承認
+        - else
+          %p 未確定
       %td
         = link_to "編集", edit_user_interview_path(id: interview.id)
       %td

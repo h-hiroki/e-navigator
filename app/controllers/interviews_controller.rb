@@ -2,6 +2,7 @@ class InterviewsController < ApplicationController
 
   def index
     @interviews = Interview.where(user_id: params[:user_id]).order(interview_datetime: :asc)
+    @user       = User.find(params[:user_id])
   end
 
   def new
@@ -33,6 +34,14 @@ class InterviewsController < ApplicationController
       redirect_to user_interviews_path, notice: '日程を削除しました'
     else
       redirect_to user_interviews_path, alert: '失敗しました。やり直して下さい'
+    end
+  end
+
+  def change_state
+    if Interview.where(id: params[:id]).update(state: 1)
+      redirect_to user_interviews_path, notice: '面接日程を確定しました'
+    else
+      redirect_to user_interviews_path, alert: '日程確定に失敗しました'
     end
   end
 
