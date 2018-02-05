@@ -17,8 +17,7 @@
       %td
         = user.email
       %td
-        - if user.birthday != nil
-          = (Date.today.strftime('%Y%m%d').to_i - user.birthday.strftime('%Y%m%d').to_i )/ 10000
+        = user.calc_birthday
       %td
         = user.sex
       %td

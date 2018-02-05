@@ -9,9 +9,9 @@
   - @interviews.each do |interview|
     %tr
       %td
-        = interview.interview_datetime.strftime("%Y/%m/%d  %H:%M:%S")
+        = interview.formated_datetime
       %td
-        - if interview.state == 1
+        - if interview.approval?
           %p 承認
         - else
           %p 未確定

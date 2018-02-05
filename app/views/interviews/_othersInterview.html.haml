@@ -7,12 +7,11 @@
     %td 日程確定状態
   %tbody
   - @interviews.each do |interview|
-    - interview_date = interview.interview_datetime.strftime("%Y/%m/%d  %H:%M:%S")
     %tr
       %td
-        = link_to interview_date, user_interviews_change_state_path(id: interview.id), method: "POST", data: {confirm: "#{interview_date}で面接を確定します。よろしいですか？"}
+        = link_to interview.formated_datetime, user_interviews_change_state_path(id: interview.id), method: "POST", data: {confirm: "#{interview.formated_datetime}で面接を確定します。よろしいですか？"}
       %td
-        - if interview.state == 1
+        - if interview.approval?
           %p 面接が設定されています
 
 %br
