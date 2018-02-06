@@ -11,5 +11,6 @@ Rails.application.routes.draw do
     resources :interviews
   end
 
-  post 'users/:user_id/interviews/:id', to: 'interviews#change_state', as: 'user_interviews_change_state'
+  patch 'users/:user_id/interview/:id', to: 'interviews#change_state', as: 'user_interview_change_state'
+
 end
