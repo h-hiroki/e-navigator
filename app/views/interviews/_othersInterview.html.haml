@@ -9,7 +9,7 @@
   - @interviews.each do |interview|
     %tr
       %td
-        = link_to interview.formated_datetime, user_interview_change_state_path(id: interview.id), method: "PATCH", data: {confirm: "#{interview.formated_datetime}で面接を確定します。よろしいですか？"}
+        = link_to interview.formated_datetime, user_interview_path(id: interview.id), method: "PATCH", data: {confirm: "#{interview.formated_datetime}で面接を確定します。よろしいですか？"}
       %td
         - if interview.approval?
           %p 面接が設定されています
