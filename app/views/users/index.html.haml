@@ -1,4 +1,28 @@
-%h1 ユーザー一覧が作られる予定の画面
+%h1 ユーザー一覧
 = link_to "ユーザー情報編集", edit_user_path(current_user.id)
 = link_to "面接日程一覧", user_interviews_path(current_user.id)
 = link_to "ログアウト", users_sign_out_path
+%table
+  %thead
+    %td 名前
+    %td e-mail
+    %td 年齢
+    %td 性別
+    %td 学校名
+    %td
+  - @users.each do |user|
+    %tr
+      %td
+        = user.name
+      %td
+        = user.email
+      %td
+        = user.calc_age
+      %td
+        = user.sex
+      %td
+        = user.school_name
+      %td
+        = link_to "面接一覧", user_interviews_path(user.id)
+      %br
+

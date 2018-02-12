@@ -6,4 +6,13 @@ class User < ApplicationRecord
 
   enum sex: { male: 0, female: 1 }
   has_many :interview
+
+  def calc_age
+    if self.birthday != nil
+      (Date.today.strftime('%Y%m%d').to_i - self.birthday.strftime('%Y%m%d').to_i )/ 10000
+    else
+      ""
+    end
+  end
+
 end

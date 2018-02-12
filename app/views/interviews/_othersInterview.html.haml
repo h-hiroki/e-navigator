@@ -1,0 +1,19 @@
+%h1 #{@user.name}さんの面接一覧
+%h3 現在の面接日程
+%p 面接日程を確定する場合は以下から選んでください。
+%table
+  %thead
+    %td 面接開始時間
+    %td 日程確定状態
+  %tbody
+  - @interviews.each do |interview|
+    %tr
+      %td
+        = link_to interview.formated_datetime, user_interview_path(id: interview.id), method: "PATCH", data: {confirm: "#{interview.formated_datetime}で面接を確定します。よろしいですか？"}
+      %td
+        - if interview.approval?
+          %p 面接が設定されています
+
+%br
+= link_to "トップページ", users_path
+
