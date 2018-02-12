@@ -11,6 +11,7 @@ class InterviewsController < ApplicationController
 
   def create
     if Interview.create(create_params)
+      InterviewcreatedMailer.send_when_create(current_user).deliver
       redirect_to user_interviews_path, notice: '日程を作成しました'
     else
       redirect_to user_interviews_path, alert: '失敗しました。やり直して下さい'
@@ -30,6 +31,8 @@ class InterviewsController < ApplicationController
       end
     else                                            # 他人の面接日程を承認する場合
       if Interview.where(id: params[:id]).update(state: 1)
+        @approved_user = User.find(params[:user_id])
+        InterviewapprovedMailer.send_when_approve(current_user, @approved_user).deliver
         redirect_to user_interviews_path, notice: '面接日程を確定しました'
       else
         redirect_to user_interviews_path, alert: '日程確定に失敗しました'
